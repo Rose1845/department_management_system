@@ -9,27 +9,36 @@ import java.time.LocalDate;
 public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long enrollmentId;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
     private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
+    @Column(name = "enrollment_date")
 
     private LocalDate enrollmentDate;
 
-    public Enrollment(Long id, Student student, Course course, LocalDate enrollmentDate) {
-        this.id = id;
+    public Enrollment(Long enrollmentId, Student student, Course course, LocalDate enrollmentDate) {
+        this.enrollmentId= enrollmentId;
         this.student = student;
         this.course = course;
         this.enrollmentDate = enrollmentDate;
     }
 
-    public Long getId() {
-        return id;
+    public Long getEnrollmentId() {
+        return enrollmentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEnrollmentId(Long id) {
+        this.enrollmentId= enrollmentId;
     }
 
+
+    @ManyToOne
+    @JoinColumn(name="student_id")
     public Student getStudent() {
         return student;
     }

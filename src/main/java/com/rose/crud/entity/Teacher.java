@@ -9,41 +9,42 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long id;
-    private String name;
-    private String email;
-
+    private Long teacherId;
+    private String teacherName;
+    private String teacherEmail;
+    @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
 
-    public Teacher(Long id, String name, String email, List<Course> courses) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+
+    public Teacher(Long teacherId, String teacherName, String teacherEmail, List<Course> courses) {
+        this.teacherId = teacherId;
+        this.teacherName = teacherName;
+        this.teacherEmail = teacherEmail;
         this.courses = courses;
     }
 
-    public Long getId() {
-        return id;
+    public Long getTeacherId() {
+        return teacherId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public String getName() {
-        return name;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTeacherEmail() {
+        return teacherEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTeacherEmail(String teacherEmail) {
+        this.teacherEmail = teacherEmail;
     }
 
     public List<Course> getCourses() {

@@ -4,6 +4,8 @@ package com.rose.crud.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table (name=("departments"))
 public class Department {
@@ -14,6 +16,8 @@ public class Department {
     private String departmentCode;
     private String departmentAddress;
     private String departmentName;
+    @OneToMany(mappedBy = "department")
+    private List<Course> courses;
 
     public Department() {
     }
