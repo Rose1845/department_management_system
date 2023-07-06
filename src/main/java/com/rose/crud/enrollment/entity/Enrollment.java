@@ -3,12 +3,14 @@ package com.rose.crud.enrollment.entity;
 import com.rose.crud.course.entity.Course;
 import com.rose.crud.student.entity.Student;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
+@Builder
 @Table(name = "enrollments")
 public class Enrollment {
     @Id

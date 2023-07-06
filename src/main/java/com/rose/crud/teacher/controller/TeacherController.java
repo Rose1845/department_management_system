@@ -24,12 +24,14 @@ public class TeacherController {
     }
     @GetMapping("/teachers")
     public List<Teacher> getAllTeachers(){
-        return null;
+
+        return teacherService.getAllTeachers();
     }
     @GetMapping("/teachers/{id}")
 
     public Optional<Teacher> getTeacher(@PathVariable("id") Long teacherId){
-        return null;
+
+        return teacherService.getTeacherById(teacherId);
     }
     @DeleteMapping("/teachers/{id}")
     public String deleteTeacher(@PathVariable("id") Long teacherId){

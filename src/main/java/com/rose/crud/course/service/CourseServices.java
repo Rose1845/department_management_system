@@ -6,6 +6,9 @@ import com.rose.crud.course.request.CourseRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CourseServices {
     @Autowired
@@ -13,11 +16,24 @@ public class CourseServices {
 
     public Course createCourse(CourseRequest courseRequest) {
 
-        Course course = Course.builder()
+        Course newCourse = Course.builder()
                 .courseName(courseRequest.getCourseName())
                 .build();
 
-        return  courseRepository.save(course);
+        return  courseRepository.save(newCourse);
+
+    }
+
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    public Optional<Course> getCourseById(Long courseId) {
+        return courseRepository.findById(courseId);
+    }
+
+    public Optional<Course> deleteCourse(Long courseId) {
+       return courseRepository.deleteCourseByCourseId(courseId);
 
     }
 }

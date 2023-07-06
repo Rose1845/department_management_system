@@ -24,18 +24,19 @@ public class CourseController {
     }
     @GetMapping("/courses")
     public List<Course> getAllCourses(){
-        return null;
+        return courseServices.getAllCourses();
 
     }
     @GetMapping("courses/{id}")
     public Optional<Course> getCourseById(@PathVariable("id") Long courseId){
-        return null;
+        return courseServices.getCourseById(courseId);
 
 
     }
     @DeleteMapping("/courses/{id}")
-    public String deleteCourse(@PathVariable("id") Long courseId){
-        return"deleted successfully";
+    public Optional<Course> deleteCourse(@PathVariable("id") Long courseId){
+
+        return courseServices.deleteCourse(courseId);
     }
 
 

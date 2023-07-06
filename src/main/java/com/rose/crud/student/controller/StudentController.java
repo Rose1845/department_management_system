@@ -26,12 +26,14 @@ public class StudentController {
     }
     @GetMapping("/students")
     public List<Student> getAllStudents(){
-        return null;
+
+        return studentService.getAllStudents();
     }
     @GetMapping("/students/{id}")
 
     public Optional<Student> getStudent(@PathVariable("id") Long studentId){
-        return null;
+
+        return studentService.getStudentById(studentId);
     }
     @DeleteMapping("/students/{id}")
     public String deleteStudent(@PathVariable("id") Long studentId){

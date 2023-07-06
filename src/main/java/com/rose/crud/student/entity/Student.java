@@ -1,5 +1,6 @@
 package com.rose.crud.student.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rose.crud.course.entity.Course;
 import com.rose.crud.enrollment.entity.Enrollment;
 import jakarta.persistence.*;
@@ -22,9 +23,10 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long studentId;
-    private String StudentName;
+    private String studentName;
     private String studentEmail;
     @Column(name = "enrollment_date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate enrollmentDate;
     @OneToMany(mappedBy="student")
 
@@ -40,11 +42,11 @@ public class Student {
                     name = "course_id"
             )
     )
-    private LinkedHashSet<Course> courses;
+    private List<Course> courses;
 
-    public Student(Long studentId, String studentName, String studentEmail, LocalDate enrollmentDate, List<Enrollment> enrollments, LinkedHashSet<Course> courses) {
+    public Student(Long studentId, String studentName, String studentEmail, LocalDate enrollmentDate, List<Enrollment> enrollments, List<Course> courses) {
         this.studentId = studentId;
-        StudentName = studentName;
+        studentName = studentName;
         this.studentEmail = studentEmail;
         this.enrollmentDate = enrollmentDate;
         this.enrollments = enrollments;
@@ -63,11 +65,11 @@ public class Student {
         return Objects.hash(courses);
     }
 
-    public LinkedHashSet<Course> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(LinkedHashSet<Course> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 
@@ -80,11 +82,11 @@ public class Student {
     }
 
     public String getStudentName() {
-        return StudentName;
+        return studentName;
     }
 
     public void setStudentName(String studentName) {
-        StudentName = studentName;
+        studentName = studentName;
     }
 
     public String getStudentEmail() {

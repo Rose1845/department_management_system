@@ -4,10 +4,12 @@ import com.rose.crud.course.entity.Course;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 @Entity
 @Builder
+@NoArgsConstructor
 @Data
 @Table(name = "teachers")
 public class Teacher {
@@ -20,7 +22,6 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
 
-
     public Teacher(Long teacherId, String teacherName, String teacherEmail, List<Course> courses) {
         this.teacherId = teacherId;
         this.teacherName = teacherName;
@@ -28,9 +29,6 @@ public class Teacher {
         this.courses = courses;
     }
 
-    public Teacher() {
-
-    }
 
     public Long getTeacherId() {
         return teacherId;
