@@ -20,8 +20,6 @@ public class StudentController {
     public Student createStudent(@RequestBody StudentRequest studentRequest){
 
 
-
-
         return  studentService.createStudent(studentRequest);
     }
     @GetMapping("/students")
@@ -31,13 +29,14 @@ public class StudentController {
     }
     @GetMapping("/students/{id}")
 
-    public Optional<Student> getStudent(@PathVariable("id") Long studentId){
+    public Optional<Student> getStudent(@RequestParam("id") Long studentId){
 
         return studentService.getStudentById(studentId);
     }
-    @DeleteMapping("/students/{id}")
-    public String deleteStudent(@PathVariable("id") Long studentId){
-        return "deteleted succesfully";
+    @DeleteMapping("/students")
+    public String deleteStudent(@RequestParam("id") Long studentId){
+
+        return studentService.deleteStudent(studentId);
     }
 
 }

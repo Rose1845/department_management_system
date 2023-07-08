@@ -26,7 +26,13 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
-    public Optional<Teacher> getTeacherById(Long teacherId) {
-        return Optional.ofNullable(teacherRepository.findByTeacherId(teacherId));
+    public String getTeacherById(Long teacherId) {
+        teacherRepository.findById(teacherId);
+        return "success";
+    }
+
+    public String deleteTeacher(Long teacherId) {
+        teacherRepository.deleteById(teacherId);
+        return "Teacher with "+ teacherId + "has been deleted";
     }
 }

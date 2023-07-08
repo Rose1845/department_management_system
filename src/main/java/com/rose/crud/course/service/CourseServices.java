@@ -32,8 +32,9 @@ public class CourseServices {
         return courseRepository.findById(courseId);
     }
 
-    public Optional<Course> deleteCourse(Long courseId) {
-       return courseRepository.deleteCourseByCourseId(courseId);
-
+    public String deleteCourse(Long courseId) {
+//       return courseRepository.deleteCourseByCourseId(courseId);
+        courseRepository.deleteById(courseId);
+        return "deleted successfully";
     }
 }

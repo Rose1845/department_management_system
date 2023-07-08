@@ -28,13 +28,13 @@ public class CourseController {
 
     }
     @GetMapping("courses/{id}")
-    public Optional<Course> getCourseById(@PathVariable("id") Long courseId){
+    public Optional<Course> getCourseById(@RequestParam("id") Long courseId){
         return courseServices.getCourseById(courseId);
 
 
     }
-    @DeleteMapping("/courses/{id}")
-    public Optional<Course> deleteCourse(@PathVariable("id") Long courseId){
+    @DeleteMapping("/courses")
+    public String deleteCourse(@RequestParam("id") Long courseId){
 
         return courseServices.deleteCourse(courseId);
     }

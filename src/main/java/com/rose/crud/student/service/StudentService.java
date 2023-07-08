@@ -32,4 +32,9 @@ public class StudentService {
     public Optional<Student> getStudentById(Long studentId) {
         return studentRepository.findById(studentId);
     }
+
+    public String deleteStudent(Long studentId) {
+        studentRepository.deleteById(studentId);
+        return "Student with " + studentId + "has been deleted";
+    }
 }

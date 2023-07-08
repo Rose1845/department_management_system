@@ -33,9 +33,9 @@ public class Course {
     private Department department;
     @ManyToMany(mappedBy = "courses")
     @JsonIgnore
-    private LinkedHashSet<Student> students;
+    private List<Student> students;
 
-    public Course(Long courseId, String courseName, Teacher teacher, List<Enrollment> enrollments, Department department, LinkedHashSet<Student> students) {
+    public Course(Long courseId, String courseName, Teacher teacher, List<Enrollment> enrollments, Department department, List<Student> students) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.teacher = teacher;
@@ -65,11 +65,11 @@ public class Course {
         this.department = department;
     }
 
-    public LinkedHashSet<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(LinkedHashSet<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
