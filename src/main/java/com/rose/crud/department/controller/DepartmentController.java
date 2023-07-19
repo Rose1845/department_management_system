@@ -37,8 +37,8 @@ public class DepartmentController {
         return "deleted successfully";
 
     }
-    @GetMapping("/department/name/{name}")
-    public String getDepartmentByName(@PathVariable("name") String departmentName){
+    @GetMapping("/department/name")
+    public String getDepartmentByName(@RequestParam("name") String departmentName){
        return departmentService.getDepartmentByName(departmentName);
     }
 

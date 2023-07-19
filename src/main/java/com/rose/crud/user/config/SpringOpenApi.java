@@ -14,8 +14,6 @@ public class SpringOpenApi {
                         .title("SECURITY FOR SCHOOL MANAGEMENT SYSTEM")
                         .description("API to reister and login A USER ")
                         .version("1.0.0")
-//                        .contact()
         );
-//                .security(new ArrayList<>(new SecurityRequirement))
     }
 }
