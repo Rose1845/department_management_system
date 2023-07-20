@@ -1,7 +1,6 @@
 package com.rose.crud.course.entity;
 
 import com.rose.crud.department.entity.Department;
-import com.rose.crud.enrollment.entity.Enrollment;
 import com.rose.crud.student.entity.Student;
 import com.rose.crud.teacher.entity.Teacher;
 import jakarta.persistence.*;
@@ -23,15 +22,15 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
     private String courseName;
-    @ManyToOne
-    @JoinColumn(name="teacher_id")
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name="teacher_id",
+    referencedColumnName = "teacherId")
     private Teacher teacher;
-    @OneToMany(mappedBy = "course")
-    private List<Enrollment> enrollments;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id",referencedColumnName = "departmentId")
     private Department department;
-    @OneToMany
-    private List<Student> students;
+    @OneToOne(mappedBy = "course")
+    private Student student;
 
 
 }

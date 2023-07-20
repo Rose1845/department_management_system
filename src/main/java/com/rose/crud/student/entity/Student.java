@@ -15,28 +15,20 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString(exclude = "course")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long studentId;
     private String studentName;
+    @Column(name = "student_email",unique = true)
     private String studentEmail;
     @Column(name = "enrollment_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate enrollmentDate;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "student_course",
-            joinColumns = @JoinColumn(
-                    name = "student_id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "course_id"
-            )
-    )
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = false)
+    @JoinColumn(name = "course_id",referencedColumnName = "courseId")
     private Course course;
-
-
 
 }

@@ -4,7 +4,8 @@ import com.rose.crud.course.entity.Course;
 import com.rose.crud.course.repository.CourseRepository;
 import com.rose.crud.course.request.CourseRequest;
 import com.rose.crud.department.entity.Department;
-import com.rose.crud.enrollment.entity.Enrollment;
+import com.rose.crud.department.repository.DepartmentRepository;
+import com.rose.crud.department.request.DepartmentRequest;
 import com.rose.crud.error.ApiRequestHandlerException;
 import com.rose.crud.student.entity.Student;
 import com.rose.crud.student.repository.StudentRepository;
@@ -26,6 +27,7 @@ public class CourseServices {
 
     private final CourseRepository courseRepository;
     private final StudentRepository studentRepository;
+    private final DepartmentRepository departmentRepository;
     private final TeacherRepository teacherRepository;
 
     public Course createCourse(CourseRequest courseRequest) {
@@ -34,19 +36,32 @@ public class CourseServices {
             throw new ApiRequestHandlerException("Course already exist");
         }
 
-        List<Student> students = studentRepository.findAll();
 
-//        Department department = Department.builder()
-//                .departmentAddress(courseRequest.getDepartmentRequest().getDepartmentAddress())
-//                .departmentName(courseRequest.getDepartmentRequest().getDepartmentName())
-//                .departmentCode(courseRequest.getDepartmentRequest().getDepartmentCode())
-//                .build();
 //
+//        Optional<Department> department = departmentRepository.findById(Long.valueOf(courseRequest.getDepartmentId()));
+//        if(department.isPresent()){
+//            department = Optional.of(department.get());
+//        }else {
+//           department = Optional.ofNullable(Department.builder()
+//                   .departmentName(department.get().getDepartmentName())
+//                           .departmentAddress()
+//                   .build());
+//        }
+
+//         Teacher teacher = teacherRepository.findByTeacherId(Long.valueOf(courseRequest.getTeacherId()));
+//        if (teacher != null) {
+//            courseRequest.setTeacherId(courseRequest.getTeacherId());
+//        } else {
+//            teacher = Teacher.builder()
+//                    .teacherEmail(teacher.getTeacherEmail())
+//                    .teacherName(teacher.getTeacherName())
+//                    .build();
+//            teacherRepository.save(teacher);
+//        }
 //        Teacher teacher = Teacher.builder()
 //                .teacherEmail(courseRequest.getTeacherRequest().getTeacherEmail())
 //                .teacherName(courseRequest.getTeacherRequest().getTeacherName())
 //                .build();
-
         Course newCourse = builder()
                 .courseName(courseRequest.getCourseName())
 //                .teacher(teacher)

@@ -20,18 +20,18 @@ public class ApiMessage {
 
     }
 
-    @ExceptionHandler(value = {ApiRequestHandlerException.class})
-    public ResponseEntity<Object> notFoundMessage(ApiRequestHandlerException apiRequestHandlerException){
-        HttpStatus badRequest = HttpStatus.NOT_FOUND;
-        ApiRequest apiRequest = ApiRequest.builder()
-                .message(apiRequestHandlerException.getMessage())
-                .httpStatus(badRequest)
-                .throwable(apiRequestHandlerException.getCause())
-                .build();
-
-        return new ResponseEntity<>(apiRequest,badRequest);
-
-    }
+//    @ExceptionHandler(value = {ApiRequestHandlerException.class})
+//    public ResponseEntity<Object> notFoundMessage(ApiRequestHandlerException apiRequestHandlerException){
+//        HttpStatus badRequest = HttpStatus.NOT_FOUND;
+//        ApiRequest apiRequest = ApiRequest.builder()
+//                .message(apiRequestHandlerException.getMessage())
+//                .httpStatus(badRequest)
+//                .throwable(apiRequestHandlerException.getCause())
+//                .build();
+//
+//        return new ResponseEntity<>(apiRequest,badRequest);
+//
+//    }
 
 
 }

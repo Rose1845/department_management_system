@@ -16,11 +16,11 @@ import java.util.List;
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long teacherId;
     private String teacherName;
+    @Column(name = "teacher_email",unique = true)
     private String teacherEmail;
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "teacher")
     private List<Course> courses;
 
 
