@@ -1,6 +1,7 @@
 package com.rose.crud.student.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rose.crud.course.entity.Course;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,8 +28,9 @@ public class Student {
     @Column(name = "enrollment_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate enrollmentDate;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = false)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional = false)
     @JoinColumn(name = "course_id",referencedColumnName = "courseId")
+//    @JsonManagedReference
     private Course course;
 
 }

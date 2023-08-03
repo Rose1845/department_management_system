@@ -21,14 +21,8 @@ public class DepartmentService {
                 .departmentAddress(departmentRequest.getDepartmentAddress())
                 .departmentName(departmentRequest.getDepartmentName())
                 .build();
-
-
-
-
-
         return departmentRepository.save(newDepartment);
     }
-
 
     public Optional<Department> getDepartmentById(Long departmentId) {
         return departmentRepository.findById(departmentId);
@@ -43,7 +37,7 @@ public class DepartmentService {
     }
 
     public String getDepartmentByName(String departmentName) {
-        departmentRepository.findByDepartmentName(departmentName);
+        departmentRepository.findDepartmentByDepartmentName(departmentName);
         return departmentName;
     }
 }

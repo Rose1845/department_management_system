@@ -15,9 +15,6 @@ public class TeacherController {
     private TeacherService teacherService;
     @PostMapping("")
     public Teacher createTeacher(@RequestBody TeacherRequest teacherRequest){
-
-
-
         return  teacherService.createTeacher(teacherRequest);
     }
     @GetMapping("")

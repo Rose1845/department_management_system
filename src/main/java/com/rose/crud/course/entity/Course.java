@@ -1,5 +1,8 @@
 package com.rose.crud.course.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rose.crud.department.entity.Department;
 import com.rose.crud.student.entity.Student;
 import com.rose.crud.teacher.entity.Teacher;
@@ -22,15 +25,12 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
     private String courseName;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="teacher_id",
-    referencedColumnName = "teacherId")
-    private Teacher teacher;
-    @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "department_id",referencedColumnName = "departmentId")
+    @JsonBackReference
     private Department department;
     @OneToOne(mappedBy = "course")
+    @JsonIgnore
+    @JsonManagedReference
     private Student student;
-
-
 }

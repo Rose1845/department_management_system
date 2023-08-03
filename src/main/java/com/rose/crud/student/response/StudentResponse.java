@@ -1,11 +1,17 @@
-package com.rose.crud.student.request;
+package com.rose.crud.student.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class StudentRequest {
+@Getter
+@Setter
+public class StudentResponse {
 
     private String StudentName;
     private String studentEmail;

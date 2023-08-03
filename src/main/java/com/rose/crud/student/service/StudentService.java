@@ -7,6 +7,7 @@ import com.rose.crud.student.entity.Student;
 import com.rose.crud.student.repository.StudentRepository;
 import com.rose.crud.student.request.CreateStudentWithCourse;
 import com.rose.crud.student.request.StudentRequest;
+import com.rose.crud.student.response.StudentResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,6 @@ public class StudentService {
     private final  StudentRepository studentRepository;
     private final CourseRepository courseRepository;
 
-//    public List<Student> getAllStudents() {
-//        return studentRepository.findAll().stream().toList();
-//
-//    }
-
     public Optional<Student> getStudentById(Long studentId) {
         return studentRepository.findById(studentId);
     }
@@ -36,21 +32,22 @@ public class StudentService {
         return "Student with " + studentId + "has been deleted";
     }
 
+    public StudentResponse createStudentWithCourse(StudentRequest studentRequest) {
+
+        Course course = courseRepository.findByCourseName(studentRequest.getCourse());
+
+        Student student = new Student();
+        student.setStudentEmail(studentRequest.getStudentEmail());
+        student.setStudentName(studentRequest.getStudentName());
+        student.setCourse(course);
+        Student savedStudent = studentRepository.save(student);
 
 
-    public Student createStudentWithCourse(CreateStudentWithCourse createStudentWithCourse) {
-        Course course = Course.builder()
-                .courseName(createStudentWithCourse.getCourseRequest().getCourseName())
-                .build();
-        Student student = Student.builder()
-                .course(course)
-                .studentName(createStudentWithCourse.getStudentRequest().getStudentName())
-                .studentEmail(createStudentWithCourse.getStudentRequest().getStudentEmail())
-                .enrollmentDate(createStudentWithCourse.getStudentRequest().getEnrollmentDate())
-                .build();
-
-        return studentRepository.save(student);
-
-
+        return StudentResponse.builder()
+                 .StudentName(savedStudent.getStudentName())
+                 .studentEmail(savedStudent.getStudentEmail())
+                 .enrollmentDate(savedStudent.getEnrollmentDate())
+                 .course(savedStudent.getCourse().getCourseName())
+                 .build();
     }
 }

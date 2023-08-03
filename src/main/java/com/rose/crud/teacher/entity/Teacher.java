@@ -20,7 +20,7 @@ public class Teacher {
     private String teacherName;
     @Column(name = "teacher_email",unique = true)
     private String teacherEmail;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "teacher")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Course> courses;
 
 

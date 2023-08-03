@@ -3,6 +3,7 @@ package com.rose.crud.course.controller;
 
 import com.rose.crud.course.entity.Course;
 import com.rose.crud.course.request.CourseRequest;
+import com.rose.crud.course.response.CourseResponse;
 import com.rose.crud.course.service.CourseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,8 @@ public class CourseController {
     private CourseServices courseServices;
 
     @PostMapping("")
-    public Course createCourse(@RequestBody CourseRequest courseRequest ){
+    public CourseResponse createCourse(@RequestBody CourseRequest courseRequest ){
         return courseServices.createCourse(courseRequest);
-
     }
     @GetMapping("")
     public List<Course> getAllCourses(){

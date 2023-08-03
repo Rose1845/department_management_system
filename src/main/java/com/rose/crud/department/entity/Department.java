@@ -2,6 +2,8 @@ package com.rose.crud.department.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rose.crud.course.entity.Course;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,8 +27,8 @@ public class Department {
     private String departmentAddress;
     private String departmentName;
     @OneToMany(mappedBy = "department")
+    @JsonIgnore
+    @JsonManagedReference
     private List<Course> courses;
-
-
 }
 
