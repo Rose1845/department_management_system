@@ -1,8 +1,11 @@
 package com.rose.crud.teacher.service;
 
+import com.rose.crud.course.entity.Course;
+import com.rose.crud.course.repository.CourseRepository;
 import com.rose.crud.teacher.entity.Teacher;
 import com.rose.crud.teacher.repository.TeacherRepository;
 import com.rose.crud.teacher.request.TeacherRequest;
+import com.rose.crud.teacher.response.TeacherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +16,25 @@ import java.util.Optional;
 public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
-    public Teacher createTeacher(TeacherRequest teacherRequest) {
+    @Autowired
+    private CourseRepository courseRepository;
+    public TeacherResponse createTeacher(TeacherRequest teacherRequest) {
 
-        Teacher newTeacher = Teacher.builder()
-                .teacherName(teacherRequest.getTeacherName())
-                .teacherEmail(teacherRequest.getTeacherEmail())
+        Course course = courseRepository.findByCourseName(teacherRequest.getCourse());
+
+        Teacher savedTeacher = new Teacher();
+        savedTeacher.setTeacherEmail(teacherRequest.getTeacherEmail());
+        savedTeacher.setTeacherName(teacherRequest.getTeacherName());
+        savedTeacher.setCourse(course);
+
+        Teacher teacher = teacherRepository.save(savedTeacher);
+
+        return  TeacherResponse.builder()
+                .teacherName(teacher.getTeacherName())
+                .teacherEmail(teacher.getTeacherEmail())
+                 .course(teacher.getCourse().getCourseName())
                 .build();
-        return teacherRepository.save(newTeacher);
+
     }
 
     public List<Teacher> getAllTeachers() {

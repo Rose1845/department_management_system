@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,4 +34,8 @@ public class Course {
     @JsonIgnore
     @JsonManagedReference
     private Student student;
+    @OneToMany(mappedBy = "course")
+    @JsonManagedReference
+    @JsonIgnore
+    private List<Teacher> teachers = new ArrayList<>();
 }
