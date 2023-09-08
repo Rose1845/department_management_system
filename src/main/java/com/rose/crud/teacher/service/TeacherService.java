@@ -1,25 +1,40 @@
 package com.rose.crud.teacher.service;
 
+import com.rose.crud.course.entity.Course;
+import com.rose.crud.course.repository.CourseRepository;
 import com.rose.crud.teacher.entity.Teacher;
 import com.rose.crud.teacher.repository.TeacherRepository;
 import com.rose.crud.teacher.request.TeacherRequest;
+import com.rose.crud.teacher.response.TeacherResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TeacherService {
-    @Autowired
-    private TeacherRepository teacherRepository;
-    public Teacher createTeacher(TeacherRequest teacherRequest) {
+    private final TeacherRepository teacherRepository;
+    private final CourseRepository courseRepository;
 
-        Teacher newTeacher = Teacher.builder()
-                .teacherName(teacherRequest.getTeacherName())
-                .teacherEmail(teacherRequest.getTeacherEmail())
+    public TeacherResponse createTeacher(TeacherRequest teacherRequest) {
+
+        Course course = courseRepository.findByCourseName(teacherRequest.getCourse());
+
+        Teacher savedTeacher = new Teacher();
+        savedTeacher.setTeacherEmail(teacherRequest.getTeacherEmail());
+        savedTeacher.setTeacherName(teacherRequest.getTeacherName());
+        savedTeacher.setCourse(course);
+
+        Teacher teacher = teacherRepository.save(savedTeacher);
+
+        return TeacherResponse.builder()
+                .teacherName(teacher.getTeacherName())
+                .teacherEmail(teacher.getTeacherEmail())
+                .course(teacher.getCourse().getCourseName())
                 .build();
-        return teacherRepository.save(newTeacher);
+
     }
 
     public List<Teacher> getAllTeachers() {
@@ -31,8 +46,11 @@ public class TeacherService {
         return "success";
     }
 
+
     public String deleteTeacher(Long teacherId) {
         teacherRepository.deleteById(teacherId);
-        return "Teacher with "+ teacherId + "has been deleted";
+        return "Teacher with " + teacherId + "has been deleted";
     }
+
+
 }

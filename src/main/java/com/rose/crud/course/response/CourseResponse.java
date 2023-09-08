@@ -1,14 +1,15 @@
-package com.rose.crud.user.auth;
+package com.rose.crud.course.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @AllArgsConstructor
-@Builder
 @NoArgsConstructor
-public class AuthenticationResponse {
-    private String token;
+public class CourseResponse {
+    private String courseName;
+    private String department;
 }
