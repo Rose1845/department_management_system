@@ -15,18 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/auth")
 public class UserController {
     private final UserServiceImpl userService;
-//
-//
-//    @PostMapping("/register")
-//    public User registerUser(RegistrationRequest registrationRequest){
-//        return userService.register(registrationRequest);
-//
-//    }
-//    @PostMapping("/login")
-//    public String loginUser(LoginRequest loginRequest){
-//        return userService.login(loginRequest);
-//    }
-
 
     @PostMapping("/register")
     public User register(@RequestBody RegistrationRequest registerRequest) throws Exception {

@@ -1,6 +1,7 @@
 package com.rose.crud.user.service;
 
 import com.rose.crud.error.ApiRequestHandlerException;
+import com.rose.crud.user.email.service.EmailService;
 import com.rose.crud.user.request.LoginRequest;
 import com.rose.crud.user.entity.User;
 import com.rose.crud.user.repository.UserRepository;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class UserServiceImpl {
     private final UserRepository userRepository;
     private final GenerateOtp generateOtp;
+    private final EmailService emailService;
 //    private final EmailUtil emailUtil;
     public User register(RegistrationRequest registrationRequest) throws Exception {
         Optional<User> existingUser = Optional.ofNullable(userRepository.findByEmail(registrationRequest.getEmail()));
@@ -37,8 +39,10 @@ public class UserServiceImpl {
                     .createdAt(LocalDateTime.now())
                     .isEnabled(false)
                     .build();
+            emailService.sendEmail(newUser.getEmail(),"Verify your account",newUser.getOtp());
 
             return userRepository.save(newUser);
+
 
         } catch (Exception e) {
             throw new ApiRequestHandlerException("unable to send otp try again");
@@ -55,7 +59,6 @@ public class UserServiceImpl {
         user.setIsEnabled(true);
         userRepository.save(user);
         return "user verified you can now login";
-
     }
     public String regenerateOtp(String email) {
         User user = userRepository.findByEmail(email);
@@ -68,6 +71,8 @@ public class UserServiceImpl {
         String otp = generateOtp.generateOtp();
         user.setOtp(otp);
         user.setCreatedAt(LocalDateTime.now());
+        emailService.sendEmail(email,"Generated OTP",otp);
+
         userRepository.save(user);
         return "verify your account";
     }

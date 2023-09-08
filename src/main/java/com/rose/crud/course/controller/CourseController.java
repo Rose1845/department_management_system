@@ -51,6 +51,7 @@ public class CourseController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @GetMapping("/teachers-by-course/{courseId}")
     public ResponseEntity<List<Teacher>> getTeachersByCourse(@PathVariable Long courseId) {
         List<Teacher> students = courseServices.findTeachersByCourse(courseId);
@@ -60,6 +61,5 @@ public class CourseController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
 }
