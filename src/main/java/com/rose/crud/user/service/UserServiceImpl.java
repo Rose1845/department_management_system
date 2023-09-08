@@ -37,7 +37,6 @@ public class UserServiceImpl {
                     .createdAt(LocalDateTime.now())
                     .isEnabled(false)
                     .build();
-//            emailUtil.sendOtpEmail(registerRequest.getEmail(),otp);
 
             return userRepository.save(newUser);
 

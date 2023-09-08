@@ -37,5 +37,6 @@ public class Course {
     @OneToMany(mappedBy = "course")
     @JsonManagedReference
     @JsonIgnore
-    private List<Teacher> teachers = new ArrayList<>();
+    private List<Teacher> teachers;
 }
+

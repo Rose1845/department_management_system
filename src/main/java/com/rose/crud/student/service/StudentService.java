@@ -3,9 +3,9 @@ package com.rose.crud.student.service;
 import com.rose.crud.course.entity.Course;
 import com.rose.crud.course.repository.CourseRepository;
 import com.rose.crud.course.request.CourseRequest;
+import com.rose.crud.guardian.Guardian;
 import com.rose.crud.student.entity.Student;
 import com.rose.crud.student.repository.StudentRepository;
-import com.rose.crud.student.request.CreateStudentWithCourse;
 import com.rose.crud.student.request.StudentRequest;
 import com.rose.crud.student.response.StudentResponse;
 import lombok.AllArgsConstructor;
@@ -40,14 +40,32 @@ public class StudentService {
         student.setStudentEmail(studentRequest.getStudentEmail());
         student.setStudentName(studentRequest.getStudentName());
         student.setCourse(course);
-        Student savedStudent = studentRepository.save(student);
 
+
+        Guardian guardian= new Guardian();
+        guardian.setGuardianEmail(studentRequest.getGuardianEmail());
+        guardian.setGuardianLastName(studentRequest.getGuardianLastName());
+        guardian.setPhoneNumber(studentRequest.getPhoneNumber());
+        guardian.setGuardianFirstName(studentRequest.getGuardianFirstName());
+
+        student.setGuardian(guardian);
+
+        Student savedStudent = studentRepository.save(student);
 
         return StudentResponse.builder()
                  .StudentName(savedStudent.getStudentName())
                  .studentEmail(savedStudent.getStudentEmail())
                  .enrollmentDate(savedStudent.getEnrollmentDate())
                  .course(savedStudent.getCourse().getCourseName())
+                .guardianEmail(guardian.getGuardianEmail()) // Set guardian properties separately
+                .guardianLastName(guardian.getGuardianLastName())
+                .guardianFirstName(guardian.getGuardianFirstName())
+                .phoneNumber(guardian.getPhoneNumber())
                  .build();
     }
+
+    public List<Student> getALlStudents(){
+        return studentRepository.findAll();
+    }
+
 }

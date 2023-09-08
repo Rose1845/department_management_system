@@ -1,10 +1,14 @@
 package com.rose.crud.department.controller;
 
 
+import com.rose.crud.course.entity.Course;
 import com.rose.crud.department.request.DepartmentRequest;
 import com.rose.crud.department.service.DepartmentService;
 import com.rose.crud.department.entity.Department;
+import com.rose.crud.student.entity.Student;
+import com.rose.crud.teacher.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +45,42 @@ public class DepartmentController {
     public String getDepartmentByName(@RequestParam("name") String departmentName){
        return departmentService.getDepartmentByName(departmentName);
     }
+    @GetMapping("/courses-by-department/{departmentId}")
+    public ResponseEntity<List<Course>> getCoursesByDepartment(@PathVariable Long departmentId) {
+        List<Course> courses = departmentService.findCoursesByDepartment(departmentId);
+        if (!courses.isEmpty()) {
+            return ResponseEntity.ok(courses);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/students-by-course-in-department")
+    public ResponseEntity<List<Student>> getStudentsByCourseInDepartment(
+            @RequestParam(value = "departmentId") Long departmentId,
+            @RequestParam(value = "courseName") String courseName
+    ) {
+        List<Student> students = departmentService.findStudentsByCourseInDepartment(departmentId, courseName);
+        if (!students.isEmpty()) {
+            return ResponseEntity.ok(students);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/teachers-by-course-in-department")
+    public ResponseEntity<List<Teacher>> getTeachersByCourseInDepartment(
+            @RequestParam(value = "departmentId") Long departmentId,
+            @RequestParam(value = "courseName") String courseName
+    ) {
+        List<Teacher> teachers = departmentService.findTeachersByCourseInDepartment(departmentId, courseName);
+        if (!teachers.isEmpty()) {
+            return ResponseEntity.ok(teachers);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
 

@@ -6,18 +6,18 @@ import com.rose.crud.teacher.entity.Teacher;
 import com.rose.crud.teacher.repository.TeacherRepository;
 import com.rose.crud.teacher.request.TeacherRequest;
 import com.rose.crud.teacher.response.TeacherResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TeacherService {
-    @Autowired
-    private TeacherRepository teacherRepository;
-    @Autowired
-    private CourseRepository courseRepository;
+    private final TeacherRepository teacherRepository;
+    private final CourseRepository courseRepository;
+
     public TeacherResponse createTeacher(TeacherRequest teacherRequest) {
 
         Course course = courseRepository.findByCourseName(teacherRequest.getCourse());
@@ -29,10 +29,10 @@ public class TeacherService {
 
         Teacher teacher = teacherRepository.save(savedTeacher);
 
-        return  TeacherResponse.builder()
+        return TeacherResponse.builder()
                 .teacherName(teacher.getTeacherName())
                 .teacherEmail(teacher.getTeacherEmail())
-                 .course(teacher.getCourse().getCourseName())
+                .course(teacher.getCourse().getCourseName())
                 .build();
 
     }
@@ -46,8 +46,11 @@ public class TeacherService {
         return "success";
     }
 
+
     public String deleteTeacher(Long teacherId) {
         teacherRepository.deleteById(teacherId);
-        return "Teacher with "+ teacherId + "has been deleted";
+        return "Teacher with " + teacherId + "has been deleted";
     }
+
+
 }

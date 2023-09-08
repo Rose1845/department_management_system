@@ -1,6 +1,7 @@
 package com.rose.crud.student.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rose.crud.guardian.Guardian;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,4 +19,8 @@ public class StudentResponse {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate enrollmentDate;
     private String course;
+    private String guardianEmail;
+    private String guardianLastName;
+    private String guardianFirstName;
+    private String phoneNumber;
 }

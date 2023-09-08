@@ -64,4 +64,10 @@ public class CourseServices {
     public Optional<Course> getAllStudentsByCourseName(String courseName) {
         return courseRepository.findAllStudentsByCourseName(courseName);
     }
+    public List<Student> findStudentsByCourse(Long courseId) {
+        return courseRepository.findStudentsByCourseId(courseId);
+    }
+    public List<Teacher> findTeachersByCourse(Long courseId) {
+        return courseRepository.findTeachersByCourseId(courseId);
+    }
 }

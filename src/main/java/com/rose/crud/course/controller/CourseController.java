@@ -5,10 +5,11 @@ import com.rose.crud.course.entity.Course;
 import com.rose.crud.course.request.CourseRequest;
 import com.rose.crud.course.response.CourseResponse;
 import com.rose.crud.course.service.CourseServices;
+import com.rose.crud.student.entity.Student;
+import com.rose.crud.teacher.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.PublicKey;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,25 @@ public class CourseController {
     public String deleteCourse(@RequestParam("id") Long courseId){
 
         return courseServices.deleteCourse(courseId);
+    }
+
+    @GetMapping("/students-by-course/{courseId}")
+    public ResponseEntity<List<Student>> getStudentsByCourse(@PathVariable Long courseId) {
+        List<Student> students = courseServices.findStudentsByCourse(courseId);
+        if (!students.isEmpty()) {
+            return ResponseEntity.ok(students);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/teachers-by-course/{courseId}")
+    public ResponseEntity<List<Teacher>> getTeachersByCourse(@PathVariable Long courseId) {
+        List<Teacher> students = courseServices.findTeachersByCourse(courseId);
+        if (!students.isEmpty()) {
+            return ResponseEntity.ok(students);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
