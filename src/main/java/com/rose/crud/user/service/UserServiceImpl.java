@@ -35,6 +35,7 @@ public class UserServiceImpl {
                     .firstName(registrationRequest.getFirstName())
                     .lastName(registrationRequest.getLastName())
                     .password(registrationRequest.getPassword())
+                    .gender(registrationRequest.getGender())
                     .otp(otp)
                     .createdAt(LocalDateTime.now())
                     .isEnabled(false)
@@ -62,8 +63,7 @@ public class UserServiceImpl {
     }
     public String regenerateOtp(String email) {
         User user = userRepository.findByEmail(email);
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//                .orElseThrow(() -> new ApiRequestHandlerException("User not found"));
+
 
         if(user.getOtp() != null ){
             user.setOtp(null);

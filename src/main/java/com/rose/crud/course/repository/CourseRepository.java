@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Transactional
 public interface CourseRepository extends JpaRepository<Course,Long> {
     Course findByCourseName(String courseName);
     Optional<Course> deleteCourseByCourseId(Long courseId);
