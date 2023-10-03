@@ -2,11 +2,14 @@ package com.rose.crud.teacher.entity;
 
 import com.rose.crud.course.entity.Course;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.text.Document;
 import java.util.List;
 @Entity
 @Builder
@@ -23,6 +26,5 @@ public class Teacher {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id",referencedColumnName = "courseId")
     private Course course;
-
 
 }

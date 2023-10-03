@@ -7,16 +7,17 @@ import com.rose.crud.department.repository.DepartmentRepository;
 import com.rose.crud.department.request.DepartmentRequest;
 import com.rose.crud.student.entity.Student;
 import com.rose.crud.teacher.entity.Teacher;
-import lombok.Builder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 @Service
 public class DepartmentService {
-    @Autowired
-    private DepartmentRepository departmentRepository;
+    private final DepartmentRepository departmentRepository;
+
+    public DepartmentService(DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
+    }
 
     public Department createDepartment(DepartmentRequest departmentRequest){
         Department newDepartment = Department.builder()

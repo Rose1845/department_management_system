@@ -3,7 +3,7 @@ package com.rose.crud.user.controller;
 import com.rose.crud.user.entity.User;
 import com.rose.crud.user.request.LoginRequest;
 import com.rose.crud.user.request.RegistrationRequest;
-import com.rose.crud.user.service.UserService;
+import com.rose.crud.user.response.AuthenticationResponse;
 import com.rose.crud.user.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,8 +30,8 @@ public class UserController {
         return new ResponseEntity<>(userService.regenerateOtp(email), HttpStatus.ACCEPTED);
     }
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
-        return new ResponseEntity<>(userService.login(loginRequest), HttpStatus.ACCEPTED);
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest){
+        return userService.login(loginRequest);
     }
 
 }

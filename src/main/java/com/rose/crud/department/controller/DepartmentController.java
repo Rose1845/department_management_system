@@ -7,8 +7,10 @@ import com.rose.crud.department.service.DepartmentService;
 import com.rose.crud.department.entity.Department;
 import com.rose.crud.student.entity.Student;
 import com.rose.crud.teacher.entity.Teacher;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +18,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
+@RequiredArgsConstructor
 public class DepartmentController {
 
-    @Autowired
-    private DepartmentService departmentService;
+    private final DepartmentService departmentService;
+    
+//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/departments")
     public Department createDepartment(@RequestBody DepartmentRequest departmentRequest){
         return departmentService.createDepartment(departmentRequest);
@@ -69,6 +73,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/teachers-by-course-in-department")
+//    @PreAuthorize(value = "hasAnyRole('ADMIN','MANAGER')")
     public ResponseEntity<List<Teacher>> getTeachersByCourseInDepartment(
             @RequestParam(value = "departmentId") Long departmentId,
             @RequestParam(value = "courseName") String courseName

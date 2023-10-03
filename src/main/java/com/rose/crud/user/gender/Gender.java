@@ -5,7 +5,7 @@ package com.rose.crud.user.gender;
  * 09/09/2023
  */
 public enum Gender {
+    OTHER,
     FEMALE,
     MALE,
-    OTHER
 }

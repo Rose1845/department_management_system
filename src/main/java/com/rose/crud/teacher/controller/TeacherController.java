@@ -35,7 +35,6 @@ public class TeacherController {
     }
 
 
-
     @DeleteMapping("teacher")
     public String deleteTeacher(@RequestParam("id") Long teacherId){
 

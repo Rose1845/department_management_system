@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department,Long> {
     Department findDepartmentByDepartmentName(String departmentName);
-
     @Query("SELECT d.courses FROM Department d WHERE d.departmentId = :departmentId")
     List<Course> findCoursesByDepartmentId(@Param("departmentId") Long departmentId);
 

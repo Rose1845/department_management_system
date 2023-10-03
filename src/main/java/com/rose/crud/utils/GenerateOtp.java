@@ -2,10 +2,12 @@ package com.rose.crud.utils;
 
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.Random;
 
 @Component
 public class GenerateOtp {
+
     public String generateOtp(){
         Random random = new Random();
         int randomNUmber = random.nextInt(999999);
