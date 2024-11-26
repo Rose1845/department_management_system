@@ -53,21 +53,13 @@ public class UserServiceImpl {
 
 
         } catch (Exception e) {
-            throw new ApiRequestHandlerException("unable to send otp try again");
+            throw new RuntimeException("unable to send otp try again");
         }
 
 
     }
 
-//    public String verifyAccount(String email,String otp){
-//        User user = userRepository.findByEmail(email);
-////                .orElseThrow( () -> new ApiRequestHandlerException(""));
-//        if(user.getOtp().equals(otp) && Duration.between(user.getCreatedAt(),
-//                LocalDateTime.now()).getSeconds()<(60));
-//        user.setIsEnabled(true);
-//        userRepository.save(user);
-//        return "user verified you can now login";
-//    }
+
 public String verifyAccount(String email, String otp) {
     User user = userRepository.findByEmail(email);
     if (user == null) {

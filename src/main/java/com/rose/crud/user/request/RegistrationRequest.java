@@ -18,5 +18,4 @@ public class RegistrationRequest {
     private String password;
     private Gender gender;
     private Role role;
-
 }

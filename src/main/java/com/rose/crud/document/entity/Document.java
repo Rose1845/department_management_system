@@ -4,10 +4,7 @@ package com.rose.crud.document.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -42,6 +39,7 @@ public class Document {
 
     @Lob
     @NotNull
+    @ToString.Exclude
     private byte[] content;
 
 

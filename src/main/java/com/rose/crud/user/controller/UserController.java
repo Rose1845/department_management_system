@@ -19,7 +19,6 @@ public class UserController {
     @PostMapping("/register")
     public User register(@RequestBody RegistrationRequest registerRequest) throws Exception {
         return userService.register(registerRequest);
-
     }
     @PutMapping("/verify-account")
     public ResponseEntity<String> verifyAccount(@RequestParam String email, @RequestParam String otp){

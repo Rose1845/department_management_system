@@ -41,7 +41,6 @@ public class StudentService {
         student.setStudentName(studentRequest.getStudentName());
         student.setCourse(course);
 
-
         Guardian guardian= new Guardian();
         guardian.setGuardianEmail(studentRequest.getGuardianEmail());
         guardian.setGuardianLastName(studentRequest.getGuardianLastName());
@@ -49,9 +48,7 @@ public class StudentService {
         guardian.setGuardianFirstName(studentRequest.getGuardianFirstName());
 
         student.setGuardian(guardian);
-
         Student savedStudent = studentRepository.save(student);
-
         return StudentResponse.builder()
                  .StudentName(savedStudent.getStudentName())
                  .studentEmail(savedStudent.getStudentEmail())

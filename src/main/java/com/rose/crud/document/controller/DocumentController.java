@@ -1,6 +1,5 @@
 package com.rose.crud.document.controller;
 
-
 import com.rose.crud.document.dto.DocumentDto;
 import com.rose.crud.document.entity.Document;
 import com.rose.crud.document.mappers.DocumentMapper;
@@ -14,9 +13,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -29,6 +34,24 @@ public class DocumentController {
     private final DocumentService documentService;
     private final DocumentMapper documentMapper;
     private final DocumentRepository documentRepository;
+
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+
+    @GetMapping("/uploadimage") public String displayUploadForm() {
+        return "imageupload/index";
+    }
+
+    @PostMapping(value = "/upload" ,  consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
+        StringBuilder fileNames = new StringBuilder();
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+        fileNames.append(file.getOriginalFilename());
+        Files.write(fileNameAndPath, file.getBytes());
+        model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
+        return "image-upload/index";
+    }
 
     @GetMapping("/{fileName}")
     public ResponseEntity<DocumentResponse> findByFileName(@PathVariable("fileName") String fileName) {
